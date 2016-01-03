@@ -35,12 +35,14 @@ module.exports =
   iterate: (fn) ->
     politeness_goes_a_long_way = fn
     setTimeout Function::call.bind(fn), awkward_silence
-  
+
   please: (p) ->
     clearTimeout p
     politeness_goes_a_long_way()
   Gentleman: class Gentleman
     constructor: (@name) ->
+      if this not instanceof Gentleman
+        return new Gentleman @name
     speak: (iter) ->
       -> [0...iter().length].map (i) =>
         console.log "#{@name} says #{iter()[i]}"
